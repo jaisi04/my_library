@@ -3,7 +3,7 @@ import { URL_HOME } from '../assets/urls';
 import { FormInput } from './Inputs';
 import { FormButtonWrapper, StyledFormButton, StyledFormWrapper } from './styledSkins';
 
-export const BookForm = ({ id, name, auther, count, description, updateDetails, handleBookSubmit, replace, errors }) => (
+export const BookForm = ({ id, name, author, count, description, updateDetails, handleBookSubmit, replace, errors }) => (
 	<form onSubmit={handleBookSubmit} onReset={() => replace(URL_HOME)}>
 		<fieldset>
 			<legend>{id ? 'Edit Book Details' : 'Add New Book Details'}</legend>
@@ -14,13 +14,15 @@ export const BookForm = ({ id, name, auther, count, description, updateDetails, 
 					placeHolder="Name"
 					updateDetails={updateDetails}
 					error={errors.name}
+					autoCapitalize="words"
 				/>
 				<FormInput
-					value={auther}
-					name="auther"
+					value={author}
+					name="author"
 					placeHolder="Author"
 					updateDetails={updateDetails}
-					error={errors.auther}
+					error={errors.author}
+					autoCapitalize="words"
 				/>
 				<FormInput
 					value={count}
@@ -28,6 +30,7 @@ export const BookForm = ({ id, name, auther, count, description, updateDetails, 
 					placeHolder="Count"
 					updateDetails={updateDetails}
 					error={errors.count}
+					autoCapitalize="off"
 				/>
 				<FormInput
 					value={description}
@@ -35,6 +38,7 @@ export const BookForm = ({ id, name, auther, count, description, updateDetails, 
 					placeHolder="Description"
 					updateDetails={updateDetails}
 					error={errors.description}
+					autoCapitalize="on"
 				/>
 				<FormButtonWrapper>
 					<StyledFormButton type="reset" value="< Go to Home" />

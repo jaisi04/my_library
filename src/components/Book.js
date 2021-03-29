@@ -1,22 +1,23 @@
 import React from 'react';
 import BookImg from '../assets/book.svg';
+import { COLOR_AVAILABLE, COLOR_DANGER } from '../assets/colors';
 import { URL_EDIT_BOOK } from '../assets/urls';
-import { StyledLink, StyledSection, StyledBookText, StyledSubSection, StyledText } from './styledSkins';
+import { StyledLink, StyledSection, StyledBookText, StyledSubSection } from './styledSkins';
 
-export const Book = ({ id, name, auther, image, count, description, isExpanded, onClick }) => (
-	<StyledSection faded={count <= 0} onClick={() => onClick(id)}>
+export const Book = ({ id, name, author, image, count, description, isExpanded, onClick }) => (
+	<StyledSection id={id} faded={count <= 0} onClick={() => onClick(id)}>
 		<StyledSubSection>
-			<StyledBookText>{name}</StyledBookText>
-			<StyledBookText fs="20px">By {auther}</StyledBookText>
+			<StyledBookText width="76%">{name}</StyledBookText>
+			<StyledBookText width="76%" fs="20px">By {author}</StyledBookText>
 			<img src={image || BookImg} alt="book_image" />
 		</StyledSubSection>
 		<StyledSubSection row>
-			<StyledLink to={`${URL_EDIT_BOOK}/${id}`}>Edit Details</StyledLink>
-			<StyledText>{!isExpanded ? 'View More' : 'Hide'}</StyledText>
+			<StyledLink to={`${URL_EDIT_BOOK}/${id}`} onClick={() => false}>Edit Details</StyledLink>
+			<StyledLink to="" primary>{!isExpanded ? 'View More' : 'Hide'}</StyledLink>
 		</StyledSubSection>
-		{isExpanded ? <StyledSubSection>
-			<p>{count > 0 ? `In Stock: ${count}` : 'Will be in stock soon'}</p>
-			{description ? <p>{`About: ${description}`}</p> : <p>{`No Details`}</p>}
+		{isExpanded ? <StyledSubSection height="auto">
+			<StyledBookText fs="16px" noMargin bgColor={count > 0 ? COLOR_AVAILABLE : COLOR_DANGER}>{count > 0 ? `In Stock: ${count}` : 'Will be in stock soon'}</StyledBookText>
+			<StyledBookText fs="16px" noMargin>{description ? `About: ${description}` : `No Details`}</StyledBookText>
 		</StyledSubSection> : null}
 	</StyledSection>
 );

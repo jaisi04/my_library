@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+  touch-action: manipulation;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -13,8 +18,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 h2 {
   text-align: center;
+}
+
+main {
+  height: 100%;
+  overflow-y: hidden;
 }

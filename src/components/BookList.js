@@ -1,7 +1,7 @@
 import React from 'react';
 import { URL_ADD_BOOK } from '../assets/urls';
 import Book from './Book';
-import { StyledHeader, StyledInput, StyledLink, StyledText } from './styledSkins';
+import { StyledHeader, StyledInput, StyledLink, StyledText, ScrollableSection } from './styledSkins';
 
 export const BookList = ({ bookList, isChecked, searchedKey, expandedBookID, setExpandedBookID, setSearchedKey, setToggleCheckVal }) => (
 	<main>
@@ -24,7 +24,7 @@ export const BookList = ({ bookList, isChecked, searchedKey, expandedBookID, set
 			</label>
 			<StyledLink primary to={URL_ADD_BOOK}>Add Book</StyledLink>
 		</StyledHeader>
-		<section>
+		<ScrollableSection>
 			{bookList.length ? bookList.map(
 				book => (
 					<Book key={book.id} isExpanded={expandedBookID === book.id} {...book} onClick={setExpandedBookID} />
@@ -34,7 +34,7 @@ export const BookList = ({ bookList, isChecked, searchedKey, expandedBookID, set
 					</StyledText>
 				)
 			}
-		</section>
+		</ScrollableSection>
 	</main>
 );
 
