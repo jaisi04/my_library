@@ -20,12 +20,13 @@ A classic user friendly and easy to understand online book library. It has featu
 
 4. Do `npm i` to install all the dependencies.
 
-5. Do `npm start` to start the local server. It should open [http://localhost:3000](http://localhost:3000) to view it in the browser.\
-If not, please hit [http://localhost:3000](http://localhost:3000) manually in the browser.
+5. Do `npm start` to start the local server. It should open [http://localhost:3000](http://localhost:3000) to view the home in the browser.\
+If not, please hit [http://localhost:3000](http://localhost:3000) manually in the browser.\
+    - If it is a first load, it will show the sample books, adding a first book will make the sample books invisible.
 
 6. Keep your repo updated to get the latest updates. :)
 
-7. [[Optional]()] Do `npm run build` to create a production build to the `build` folder.\
+7. [Optional] Do `npm run build` to create a production build to the `build` folder.\
 Your app is ready to be deployed!
 
 ## Learn More

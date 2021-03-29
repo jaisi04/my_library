@@ -6,31 +6,52 @@ import BookForm from '../../components/BookForm';
 export const Details = props => {
 	const context = useContext(AppContext);
 	const { match: { params: { id } }, history: { replace } } = props;
-	const defaultData = { name: '', auther: '', count: 0, description: '', image: '' };
+	const defaultData = { name: '', author: '', count: 0, description: '', image: '' };
 	const initialBookData = context.books.filter(book => +id === book.id)[0] || defaultData;
 	const [bookData, setBookData] = useState(initialBookData);
 	const [errors, setError] = useState({});
 
-	const validateFields = () => {
-		const { name, auther, count } = bookData;
+	const synthesizeFields = () => {
+		let { name, author, count, description } = bookData;
+		name = name.trim();
+		name = name.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+		author= author.trim();
+		author = author.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+		count = /^[1-9][.\d]*(,\d+)?$/.test(count) ? parseInt(count, 10) : count;
+		description = description.trim();
+		description = description[0].toUpperCase() + description.substring(1)
+		return { name, description, count, author };
+	}
+
+	const validateFields = (name, description, count, author) => {
 		let errors = {};
 		if (!name) {
-			errors = { ...errors, name: `Name can't be empty`, isError: true };
+			errors = { ...errors, name: `we support non-empty names`, isError: true };
 		}
-		if (!auther) {
-			errors = { ...errors, auther: `Author can't be empty`, isError: true };
+		if (name.length > 32) {
+			errors = { ...errors, name: `we support names having maximum length as 32 letters`, isError: true };
+		}
+		if (!author) {
+			errors = { ...errors, author: `we support non-empty author names`, isError: true };
+		}
+		if (author.length > 32) {
+			errors = { ...errors, author: `we support author names having maximum length as 32 letters`, isError: true };
 		}
 		if (!/^\d+$/.test(count)) {
 			errors = { ...errors, count: `Count should be an integer greater than or equal to 0(Zero)`, isError: true };
+		}
+		if (description.length > 96) {
+			errors = { ...errors, description: `we support author names having maximum length as 96 letters`, isError: true };
 		}
 		return errors;
 	}
 
 	const handleBookSubmit = e => {
 		e.preventDefault();
-		const errors = validateFields();
+		const { name, description, count, author } = synthesizeFields();
+		const errors = validateFields(name, description, count, author);
 		if (!errors.isError) {
-			id ? context.editBook({ ...bookData, id: +id }) : context.addBook({ ...bookData, id: new Date().getTime() });
+			id ? context.editBook({  name, description, count, author, id: +id }) : context.addBook({ name, description, count, author, id: new Date().getTime() });
 			replace(URL_HOME);
 		} else {
 			setError(errors);
