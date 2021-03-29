@@ -18,7 +18,7 @@ export const BookForm = ({ id, name, auther, count, description, updateDetails, 
 				<FormInput
 					value={auther}
 					name="auther"
-					placeHolder="Auther"
+					placeHolder="Author"
 					updateDetails={updateDetails}
 					error={errors.auther}
 				/>

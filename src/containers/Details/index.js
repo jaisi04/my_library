@@ -18,7 +18,7 @@ export const Details = props => {
 			errors = { ...errors, name: `Name can't be empty`, isError: true };
 		}
 		if (!auther) {
-			errors = { ...errors, auther: `Auther can't be empty`, isError: true };
+			errors = { ...errors, auther: `Author can't be empty`, isError: true };
 		}
 		if (!/^\d+$/.test(count)) {
 			errors = { ...errors, count: `Count should be an integer greater than or equal to 0(Zero)`, isError: true };
