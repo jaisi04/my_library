@@ -10,7 +10,7 @@ export const BookList = ({ bookList, isChecked, searchedKey, expandedBookID, set
 			type="text"
 			placeholder="Search a book here"
 			value={searchedKey}
-			onChange={e => setSearchedKey(e.target.value.toLowerCase())}
+			onChange={e => setSearchedKey(e.target.value)}
 		/>
 		<StyledHeader>
 			<label htmlFor="show_unavailable_check">
