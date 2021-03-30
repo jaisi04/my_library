@@ -24,7 +24,8 @@ export const Home = () => {
 	sessionStorage.setItem('sampleData', JSON.stringify(sampleData));
 	const totalData = books.length ? books : sampleData;
 	// search results matching book, author name or description
-	const filteredBooks = totalData.filter(book => book.name.toLowerCase().includes(searched_key) || book.author.toLowerCase().includes(searched_key) || book.description.toLowerCase().includes(searched_key));
+	const searchedKeyInLowerCase = searched_key.toLowerCase();
+	const filteredBooks = totalData.filter(book => book.name.toLowerCase().includes(searchedKeyInLowerCase) || book.author.toLowerCase().includes(searchedKeyInLowerCase) || book.description.toLowerCase().includes(searchedKeyInLowerCase));
 	// sorting the list in the decreasing order of book count
 	const sortedList = filteredBooks.sort((b1, b2) => b1.count > b2.count ? -1 : 1);
 	// deciding to exclude unavailable books
