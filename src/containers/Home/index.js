@@ -7,20 +7,21 @@ export const Home = () => {
 	// adding sample data
 	const sampleData = [
 		{
-			id: 'available_book',
+			id: '111',
 			name: 'Available Book',
 			author: 'Sample Store',
 			description: 'It is a sample book in stock. Editing this will create a actual book.',
 			count: 4,
 		},
 		{
-			id: 'unavailable_book',
+			id: '101',
 			name: 'Unavailable Book',
 			author: 'Sample Store',
 			description: 'It is a sample book not in stock. Editing this will create a actual book.',
 			count: 0,
 		}
 	]
+	sessionStorage.setItem('sampleData', JSON.stringify(sampleData));
 	const totalData = books.length ? books : sampleData;
 	// search results matching book, author name or description
 	const filteredBooks = totalData.filter(book => book.name.toLowerCase().includes(searched_key) || book.author.toLowerCase().includes(searched_key) || book.description.toLowerCase().includes(searched_key));
@@ -31,7 +32,7 @@ export const Home = () => {
 	// changes to keep scrolled position
 	const [currentPosition, setCurrentPosition] = useState({top: 0, left:0});
 	useEffect(() => {
-		if(expanded_book_id) {		
+		if(expanded_book_id) {
 			const offsets = document.getElementById(expanded_book_id).getBoundingClientRect();
 			const top = offsets.top;
 			const left = offsets.left;

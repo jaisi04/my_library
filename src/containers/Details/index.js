@@ -4,22 +4,23 @@ import { URL_HOME } from '../../assets/urls';
 import BookForm from '../../components/BookForm';
 
 export const Details = props => {
-	const context = useContext(AppContext);
+	const { books, editBook, addBook } = useContext(AppContext);
 	const { match: { params: { id } }, history: { replace } } = props;
 	const defaultData = { name: '', author: '', count: 0, description: '', image: '' };
-	const initialBookData = context.books.filter(book => +id === book.id)[0] || defaultData;
+	const sampleData = JSON.parse(sessionStorage.getItem('sampleData'));
+	const initialBookData = books.filter(book => +id === book.id)[0] || sampleData.filter(book => id === book.id)[0] || defaultData;
 	const [bookData, setBookData] = useState(initialBookData);
 	const [errors, setError] = useState({});
 
 	const synthesizeFields = () => {
 		let { name, author, count, description } = bookData;
-		name = name.trim();
-		name = name.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
-		author= author.trim();
-		author = author.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+		name = name && name.trim();
+		name = name && name.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+		author= author && author.trim();
+		author = author && author.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
 		count = /^[1-9][.\d]*(,\d+)?$/.test(count) ? parseInt(count, 10) : count;
-		description = description.trim();
-		description = description[0].toUpperCase() + description.substring(1)
+		description = description && description.trim();
+		description = description && (description[0].toUpperCase() + description.substring(1));
 		return { name, description, count, author };
 	}
 
@@ -51,7 +52,7 @@ export const Details = props => {
 		const { name, description, count, author } = synthesizeFields();
 		const errors = validateFields(name, description, count, author);
 		if (!errors.isError) {
-			id ? context.editBook({  name, description, count, author, id: +id }) : context.addBook({ name, description, count, author, id: new Date().getTime() });
+			id ? editBook({  name, description, count, author, id: +id}) : addBook({ name, description, count, author, id: new Date().getTime() });
 			replace(URL_HOME);
 		} else {
 			setError(errors);
