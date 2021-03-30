@@ -12,7 +12,7 @@ export const Book = ({ id, name, author, image, count, description, isExpanded, 
 			<img src={image || BookImg} alt="book_image" />
 		</StyledSubSection>
 		<StyledSubSection row>
-			<StyledLink to={`${URL_EDIT_BOOK}/${id}`} onClick={() => false}>Edit Details</StyledLink>
+			<StyledLink to={`${URL_EDIT_BOOK}/${id}`} onClick={(e) => e.stopPropagation()}>Edit Details</StyledLink>
 			<StyledLink to="" primary>{!isExpanded ? 'View More' : 'Hide'}</StyledLink>
 		</StyledSubSection>
 		{isExpanded ? <StyledSubSection height="auto">
