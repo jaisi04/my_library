@@ -18,6 +18,7 @@ export const Details = props => {
 		name = name && name.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
 		author= author && author.trim();
 		author = author && author.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+		count = count.replace(/^0+/, '');
 		count = /^[1-9][.\d]*(,\d+)?$/.test(count) ? parseInt(count, 10) : count;
 		description = description && description.trim();
 		description = description && (description[0].toUpperCase() + description.substring(1));
